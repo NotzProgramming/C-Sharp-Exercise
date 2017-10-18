@@ -1,0 +1,107 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp11
+{
+    class Program
+    {
+        static void Exercise1()
+        {
+            /* 1. 請設計一個程式：由鍵盤輸入二個正整數，印出這二個整數的最大公因數與最小公倍數。
+             */
+
+            Console.WriteLine("Exercise1 : 找最大公因數及最小公倍數");
+            Console.WriteLine("Enter two numbers.");
+            Console.WriteLine("First : ");
+            var input1 = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Second : ");
+            var input2 = Convert.ToInt32(Console.ReadLine());
+
+            int bigest = input1;
+            if (input2 > input1)
+                bigest = input2;
+
+            for (int i = bigest; i > 0; i--)
+            {
+                if (input1 % i == 0 && input2 % i == 0)
+                {
+                    Console.WriteLine("最大公因數 : " + i);
+                    Console.WriteLine("最小公倍數 : " + ((input1 * input2) / i));
+                    break;
+                }
+            }
+        }
+
+        static void Exercise2()
+        {
+            /* 2. 請設計一個程式：由鍵盤輸入一個正整數，印出其質因數的連乘積，由小到大依序排列之，例如12=2*2*3。
+             */
+
+            Console.WriteLine("Exercise2 : 質因數分解");
+            Console.WriteLine("Enter a number.");
+            var input = Convert.ToInt32(Console.ReadLine());
+            string result = input.ToString() + " = ";
+            var number = input;
+
+            for (int i = 2; i <= input; i++)
+            {
+                int count = 0;
+                for (int j = 1; j <= i; j++)
+                {
+                    if (i % j == 0)
+                        count++;
+                }
+
+                if (count == 2)
+                {
+                    while (number % i == 0)
+                    {
+                        if (input == i)
+                        {
+                            result = result + "1 * " + number + "   ";
+                            break;
+                        }
+                        else
+                        {
+                            number = number / i;
+                            result = result + i.ToString() + " * ";
+                        }
+                    }
+                }
+                if (number == 1)
+                    break;
+            }
+            Console.WriteLine(result.Remove(result.Length - 3, 3));
+        }
+
+        static void Exercise3()
+        {
+            /* 3. 請設計一個程式：由鍵盤輸入一個界限值N，計算1+2+5+10+17+…+m=? m是小於等於N的最大值。 (提示：相鄰兩個
+             * 數字的間隔分別是1, 3, 5, 7, 9….)
+             */
+
+            Console.WriteLine("Exercise3 : 計算數列");
+            Console.WriteLine("Enter a number.");
+            var input = Convert.ToInt32(Console.ReadLine());
+            long sum = 0;
+            int rate = 1;
+
+            for (int i = 1; i <= input; i += rate)
+            {
+                sum += i;
+                rate += 2;
+            }
+            Console.WriteLine("Result : " + sum);
+        }
+
+        static void Main(string[] args)
+        {
+            Exercise1();
+            Exercise2();
+            Exercise3();
+        }
+    }
+}
