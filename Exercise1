@@ -1,0 +1,109 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp10
+{    class Program
+    {
+        static void Exercise1()
+        {
+            /* 1.  請設計一個程式，計算下面數列的和並印出完整的數列。（提示：先分析分子和分母變化的規則性。分母都是偶數
+             * ，分子恰好是前一項的分子和分母相加。）
+             * ( Ex : 1/2 + 3/4 + 7/6 + 13/8 + 21/10 + ...... + n/100 = ? )
+             */
+
+            Console.WriteLine("Exercise1 : ");
+            double sum = 0;
+            int j = 1;
+
+            for (int i = 2; i < 100; i += 2)
+            {
+                sum += (double)(j / i);
+                j = i + j;
+            }
+
+            Console.WriteLine("The Result is " + sum);
+        }
+
+        static void Exercise2()
+        {
+            /* 2.  在《孫子算經》裡有個著名的「孫子問題」：「今有物不知其數，三三數之剩二，五五數之剩三，七七數之剩一，問物
+             * 幾何？」若把它翻譯成白話，便是：有一堆東西不知道有幾個；三個三個數它，剩餘二個；五個五個數它，剩餘三個；七個
+             * 七個數它，剩餘一個；問這堆東西有幾個？
+               請設計一個程式：由鍵盤輸入一個界限值n，計算小於等於n的整數中，哪些數字是符合孫子算經，以每列印5個，並計算共有
+               多少個。
+             */
+
+            Console.WriteLine("Exercise2 : Enter a number.");
+            var input = Convert.ToInt32(Console.ReadLine());
+            var strings = new List<string>();
+
+            for (int i = 1; i <= input; i++)
+            {
+                if (i % 3 == 2 && i % 5 == 3 && i % 7 == 1)
+                {
+                    strings.Add(Convert.ToString(i));
+                }
+            }
+
+            var count = 0;
+            foreach (var result in strings)
+            {
+                count++;
+                Console.Write(result + " ");
+                if (count == 5)
+                {
+                    Console.WriteLine("");
+                    count = 0;
+                }
+            }
+            Console.WriteLine("");
+        }
+
+        static void Exercise3()
+        {
+            /* 3.  請設計一個程式：由鍵盤輸入一個界限值n，計算並印出小於等於n的質數，以每列印5個，並計算共有多少個。
+             */
+
+            Console.WriteLine("Exercise3 : Enter a number.");
+            var input = Convert.ToInt32(Console.ReadLine());
+            var strings = new List<string>();
+
+            for (int i = 2; i <= input; i++)
+            {
+
+                var count = 0;
+                for (int j = 1; j <= i; j++)
+                {
+                    if (i % j == 0)
+                        count++;
+                }
+
+                if (count == 2)
+                    strings.Add(Convert.ToString(i));
+            }
+
+            var counts = 0;
+            foreach (var result in strings)
+            {
+                counts++;
+                Console.Write(result + " ");
+                if (counts == 5)
+                {
+                    Console.WriteLine("");
+                    counts = 0;
+                }
+            }
+            Console.WriteLine("");
+        }
+
+        static void Main(string[] args)
+        {
+            Exercise1();
+            Exercise2();
+            Exercise3();
+        }
+    }
+}
