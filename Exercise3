@@ -1,0 +1,152 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp12
+{
+    class Program
+    {
+        static void Exercise1()
+        {
+            /* 請用switch…case寫一程式：首先由鍵盤輸入二個正整數a,b，再由鍵盤任意輸入+, -, *, /, %等運算符號
+             * (若輸入 ; 表示結束，其他則顯示錯誤訊息)，將運算結果列印出來。例如：輸入+,印出a+b=??
+             */
+
+            Console.WriteLine("Exercise 1 :");
+            Console.WriteLine("Enter number A.");
+            var input1 = Convert.ToInt32(Console.ReadLine());
+            Console.WriteLine("Enter number B.");
+            var input2 = Convert.ToInt32(Console.ReadLine());
+
+            while (true)
+            {
+                Console.WriteLine("Enter actions. (Enter':' to exit)");
+                var input3 = Console.ReadLine();
+                if (input3 == ":")
+                    break;
+                switch (input3)
+                {
+                    case "+":
+                        Console.WriteLine("The result of number A + number B  is : " + (input1 + input2));
+                        break;
+                    case "-":
+                        Console.WriteLine("The result of number A - number B is : " + (input1 - input2));
+                        break;
+                    case "*":
+                        Console.WriteLine("The result of number A * number B is : " + (input1 * input2));
+                        break;
+                    case "/":
+                        Console.WriteLine("The result of number A / number B is : " + (Int32)(input1 / input2));
+                        break;
+                    case "%":
+                        Console.WriteLine("The result of number A % number B is : " + (input1 % input2));
+                        break;
+                    default:
+                        Console.WriteLine("輸入錯誤");
+                        break;
+                }
+
+            }
+        }
+
+        static void Exercise2()
+        {
+            /* 請設計一個程式：由鍵盤輸入任意個學生的姓名，先列印陣列的內容，將該陣列按由小到大排序後，再列印排序後
+             * 的陣列內容。
+             */
+            Console.WriteLine("Exercise 2 :");
+            int count = 0;
+            string[] strings = new string[count];
+            string check;
+
+            do
+            {
+                count++;
+                Array.Resize(ref strings, count);
+                Console.WriteLine("Ener No.{0} name.", count);
+                strings[count - 1] = Console.ReadLine();
+                Console.WriteLine("continue? Y/N");
+                check = Console.ReadLine();
+            } while (check == "Y" || check == "y");
+
+            Console.WriteLine("");
+            Array.Sort(strings);
+
+            foreach (var names in strings)
+            {
+                Console.WriteLine(names);
+            }
+        }
+
+        static void Exercise3()
+        {
+            /* 請設計一個程式：由鍵盤輸入任意個整數，計算每一個整數佔所有數值和的百分比(小數取兩位)。例如：輸入5個整數：98, 80, 47, 102, 23，則印出：
+             * 98 : 28.00% （算法：98/(98+80+47+102+23)）
+             * 80 : 22.86%
+             * 47 : 13.43%
+             * 102 : 29.14%
+             * 23 : 6.57%
+             * sum:350
+             */
+
+            Console.WriteLine("Exercise3 :");
+            Console.WriteLine("Enter numbers.");
+            int count = 0;
+            double[] numbers = new double[count];
+            double sum = 0;
+
+            while (true)
+            {
+                count++;
+                Array.Resize(ref numbers, count);
+
+                numbers[count - 1] = Convert.ToInt32(Console.ReadLine());
+                sum += numbers[count - 1];
+
+
+                foreach (int number in numbers)
+                {
+                    Console.WriteLine("{0} : {1}%", number, (number / sum * 100).ToString("f2"));
+                }
+
+            }
+        }
+
+        static void Exercise4()
+        {
+            /* 請設計一個程式：由鍵盤輸入一個正整數，將其轉換成二進位後印出。例如：輸入19，則印出：19=10011
+             */
+
+            Console.WriteLine("Exercise4 :");
+            Console.WriteLine("Enter a number.");
+            var input = Convert.ToInt32(Console.ReadLine());
+            int count = 0;
+            int[] result = new int[64];
+
+            while (input > 0)
+            {
+                result[count] = input % 2;
+                input = input / 2;
+                count++;
+
+            }
+
+            while (count > 0)
+            {
+                Console.Write(result[count - 1]);
+                count--;
+            }
+            Console.WriteLine("");
+        }
+
+        static void Main(string[] args)
+        {
+            Exercise1();
+            Exercise2();
+            Exercise3();
+            Exercise4();
+        }
+    }
+}
