@@ -1,0 +1,150 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp13
+{
+    class Program
+    {
+        static void Exercise1()
+        {
+            /* 請設計一個程式：應用亂數函數同時擲兩顆骰子100次，計算各個點數和出現的次數。
+             */
+
+            Console.WriteLine("Exercise1 :");
+            Random rnd = new Random();
+            int[] count = new int[13];
+
+            for (int i = 1; i <= 100; i++)
+            {
+                int drop1 = rnd.Next(1, 7);
+                int drop2 = rnd.Next(1, 7);
+                int sum = drop1 + drop2;
+
+                for (int j = 1; j <= 12; j++)
+                {
+                    if (sum == j)
+                    {
+                        count[j]++;
+                    }
+                }
+            }
+
+            for (int i = 1; i <= 12; i++)
+            {
+                Console.WriteLine("{0} : {1} time.", i, count[i]);
+            }
+        }
+
+        static void Exercise2()
+        {
+            /* 請設計一個程式：應用亂數函數產生兩個各有5個元素的整數陣列(每個元素的值為大於等於0小於100)，
+             * 將其合併成一個由大至小排列的新陣列(陣列長度為10)，請分別印出這三個陣列的內容。
+             */
+
+            Console.WriteLine("Exercise2 :");
+            Random rnd = new Random();
+            int[] numbers1 = new int[5];
+            int[] numbers2 = new int[5];
+            int[] total = new int[10];
+            int count = 0;
+
+            for (int i = 0; i < 5; i++)
+            {
+                numbers1[i] = rnd.Next(1, 101);
+                numbers2[i] = rnd.Next(1, 101);
+                total[count] = numbers1[i];
+                total[count + 1] = numbers2[i];
+                count += 2;
+            }
+
+            Array.Sort(total);
+            Array.Reverse(total);
+
+            Console.WriteLine("Result :");
+            for (int i = 0; i < 10; i++)
+            {
+                Console.WriteLine(total[i]);
+            }
+        }
+
+        static void Exercise3()
+        {
+            /* 假設某一公司有五種產品A、B、C、D與E，其單價分別為12、16、10、14與15元，而該公司共有三位銷售員，他們在某個月份的銷售量如下所示:
+              銷售員      產品A      產品B      產品C      產品D      產品E
+                1          33        32          56         45         33
+                2          77        33          68         45         23
+                3          43        55          43         67         65
+              請設計一個程式:
+              (1)印出上表的內容。
+              (2)計算每一個銷售員的銷售總金額。
+              (3)計算每一項產品ˇ的銷售總金額。
+            */
+
+            Console.WriteLine("Exercise3 :");
+            int[,] box = new int[3, 6] { { 1, 33, 32, 56, 45, 33 }, { 2, 77, 33, 68, 45, 23 }, { 3, 43, 55, 43, 67, 65 } };
+            Console.WriteLine("銷售員   產品A  產品B    產品C   產品D  產品E");
+
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 0; j < 6; j++)
+                {
+                    Console.Write("   {0}   ", box[i, j]);
+                }
+                Console.WriteLine("");
+            }
+            Console.WriteLine("");
+
+            for (int i = 0; i < 3; i++)
+            {
+                int sum = 0;
+                for (int j = 1; j < 6; j++)
+                {
+                    sum += box[i, j];
+                }
+                Console.WriteLine("銷售員{0} 的銷售總額 : {1}", i, sum);
+            }
+            Console.WriteLine("");
+
+            int[] product = new int[5];
+            for (int i = 0; i < 3; i++)
+            {
+                for (int j = 1; j < 6; j++)
+                {
+                    product[j - 1] += box[i, j];
+                }
+            }
+
+            for (int i = 0; i < 5; i++)
+            {
+                switch (i)
+                {
+                    case 0:
+                        Console.WriteLine("產品A 的銷售總額為 : {0}", product[i]);
+                        break;
+                    case 1:
+                        Console.WriteLine("產品B 的銷售總額為 : {0}", product[i]);
+                        break;
+                    case 2:
+                        Console.WriteLine("產品C 的銷售總額為 : {0}", product[i]);
+                        break;
+                    case 3:
+                        Console.WriteLine("產品D 的銷售總額為 : {0}", product[i]);
+                        break;
+                    case 4:
+                        Console.WriteLine("產品E 的銷售總額為 : {0}", product[i]);
+                        break;
+                }
+            }
+        }
+
+        static void Main(string[] args)
+        {
+            Exercise1();
+            Exercise2();
+            Exercise3();
+        }
+    }
+}
