@@ -1,0 +1,202 @@
+using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace ConsoleApp15
+{
+    class Program
+    {
+        static int Factorial(int n)
+        {
+            int sum = 1;
+            for (int i = 1; i <= n; i++)
+            {
+                sum *= i;
+            }
+            return sum;
+        }
+
+        static double Power(double a, int b)
+        {
+            double sum = 1;
+            for (int i = 1; i <= b; i++)
+            {
+                sum *= a;
+            }
+            return sum;
+        }
+
+        static void Exercise1()
+        {
+            /* 請依據底下說明來設計一個程式:
+               定義一個方法；Factorial(int n)用來計算 n!
+               定義一個方法；Power(double a, int b) 用來計算a的b次方
+               在主程式中由鍵盤鍵入一個實數 x，請應用前兩個方法來計算底下數列之和，並將其結果列印出來。
+
+                 1      2      3     4               10
+                x      x      x     x               x
+               ---  + ---  + --- + --- + ... ... + ---  = ?
+                1!     2!     3!    4!             10!
+
+             */
+            Console.WriteLine("Exercise1 :");
+            Console.WriteLine("Enter a number.");
+            var input = Convert.ToInt32(Console.ReadLine());
+
+            double sum = 0;
+            for (int i = 1; i <= 10; i++)
+            {
+                sum += (Power(input, i) / Factorial(i));
+            }
+            Console.WriteLine("Result : " + sum);
+        }
+
+        static bool Prime(int n)
+        {
+            if (n < 1)
+                return false;
+
+            int count = 0;
+            for (int i = 1; i <= n; i++)
+            {
+                if (n % i == 0)
+                    count++;
+            }
+
+            if (count == 2)
+            {
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
+        static void Exercise2()
+        {
+            /* 請依據底下說明來設計一個程式；
+               定義一個方法；Prime{int n}用來判斷n是否為質數，若是質數傳回true，否則傳回false。
+               在主程式中，由鍵盤輸入一個界線質x，請應用Prime method來印出小於x的所有質數，每五
+               個質數印一行，並計算共有多少個質數。
+             */
+
+            Console.WriteLine("Exercise2 :");
+            Console.WriteLine("Enter a number.");
+            var input = Convert.ToInt32(Console.ReadLine());
+            int count = 0;
+            string[] numbers = new string[count];
+
+
+            for (int i = 0; i <= input; i++)
+            {
+                if (Prime(i) == true)
+                {
+                    count++;
+                    Array.Resize(ref numbers, count + 1);
+                    numbers[count] = i.ToString();
+                }
+            }
+            string gether = "";
+
+            for (int i = 1; i <= count; i++)
+            {
+                gether += numbers[i] + " ";
+                if (i % 5 == 0)
+                {
+                    Console.WriteLine(gether);
+                    gether = "";
+                }
+            }
+            Console.WriteLine(gether);
+
+            Console.WriteLine("共有{0}個質數", count);
+        }
+
+        static int[] Merge(int[] a, int[] b)
+        {
+            int[] c = new int[a.Length + b.Length];
+            a.CopyTo(c, 0);
+            b.CopyTo(c, a.Length);
+            return c;
+        }
+
+        static void Exercise3()
+        {
+            /* 請依據底下說明來設計一個程式；
+               定義一個方法；int[] Merge(int[] a, int[] b)用來將a和b二個陣列合併成一個陣列c，並將合併後的陣列c回傳。
+               在主程式中，由鍵盤輸入第1個陣列的長度，再由鍵盤輸入第2個陣列的長度，請應用亂數函數產生這二個陣列的內容
+               (每個元素的質為大於等於0小於100)，呼叫Merge method將這二個陣列合併成一個陣列，請將這三個陣列的內容列印出來。
+             */
+            Console.WriteLine("Exercise3 :");
+            Console.WriteLine("Enter first number.");
+            var input1 = Convert.ToInt32(Console.ReadLine());
+            int[] a = new int[input1];
+            Console.WriteLine("Enter second number.");
+            var input2 = Convert.ToInt32(Console.ReadLine());
+            int[] b = new int[input2];
+
+            Random rnd = new Random();
+
+            for (int i = 0; i <= input1 - 1; i++)
+            {
+                a[i] = rnd.Next(0, 101);
+            }
+
+            for (int i = 0; i <= input2 - 1; i++)
+            {
+                b[i] = rnd.Next(0, 101);
+            }
+            int[] c = Merge(a, b);
+
+            string gether = "";
+            Console.WriteLine("A : ");
+            for (int i = 1; i <= a.Length; i++)
+            {
+                gether += a[i - 1] + " ";
+                if (i % 10 == 0)
+                {
+                    Console.WriteLine(gether);
+                    gether = "";
+                }
+            }
+            Console.WriteLine(gether);
+
+            gether = "";
+            Console.WriteLine("B :");
+            for (int i = 1; i <= b.Length; i++)
+            {
+                gether += b[i - 1] + " ";
+                if (i % 10 == 0)
+                {
+                    Console.WriteLine(gether);
+                    gether = "";
+                }
+            }
+            Console.WriteLine(gether);
+
+            gether = "";
+            Console.WriteLine("C : ");
+            for (int i = 1; i <= c.Length; i++)
+            {
+                gether += c[i - 1] + " ";
+                if (i % 10 == 0)
+                {
+                    Console.WriteLine(gether);
+                    gether = "";
+                }
+            }
+            Console.WriteLine(gether);
+        }
+
+        static void Main(string[] args)
+        {
+            Exercise1();
+            Exercise2();
+            Exercise3();
+        }
+
+    }
+}
